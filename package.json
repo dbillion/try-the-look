@@ -1,0 +1,18 @@
+{
+  "name": "try-the-look-runway",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static, source-faithful Try the Look runway experience for GitHub Pages.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "serve:test": "node scripts/serve.mjs",
+    "check:catalog": "node scripts/check-catalog.mjs",
+    "test": "node scripts/check-catalog.mjs && playwright test",
+    "test:headed": "playwright test --headed",
+    "check": "node scripts/check-catalog.mjs && playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1"
+  }
+}
