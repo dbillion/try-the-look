@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
 
 test.beforeEach(async ({ page }) => {
   page.pageErrors = [];
@@ -92,11 +93,16 @@ test('product size confirmation adds the exact variant to the local bag', async 
   await expect(dialog).toContainText('Air Jordan 12 Retro');
   await expect(dialog).toContainText('Size 42');
   await expect(dialog).toContainText('$149.00');
+  await expect(dialog.locator('a')).toHaveCount(0);
+  await expect(dialog).toContainText('checkout and payment are not enabled');
 
   const downloadPromise = page.waitForEvent('download');
   await page.locator('#export-bag').click();
   const download = await downloadPromise;
   expect(download.suggestedFilename()).toBe('runway-outfit-shortlist.txt');
+  const shortlist = await readFile(await download.path(), 'utf8');
+  expect(shortlist).toContain('Air Jordan 12 Retro');
+  expect(shortlist).not.toContain('https://');
 
   await page.getByRole('button', { name: 'Remove Air Jordan 12 Retro' }).click();
   await expect(page.locator('[data-cart-count]')).toHaveText('0');

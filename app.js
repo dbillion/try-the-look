@@ -49,8 +49,7 @@ window.RunwayBag = (() => {
       const details=document.createElement('div');
       const title=document.createElement('h3'); title.textContent=product.name;
       const options=document.createElement('p'); options.textContent=`Size ${variant.o.join(' / ')} · Quantity ${entry.quantity} · ${money(product.price*entry.quantity)}`;
-      const link=document.createElement('a'); const url=new URL(product.url); if(url.hostname !== 'nike-makknzjs.myshopify.com') throw new Error('Invalid product URL'); link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';link.textContent='View original piece ↗';
-      details.append(title,options,link);
+      details.append(title,options);
       const remove=document.createElement('button');remove.textContent='×';remove.setAttribute('aria-label','Remove '+product.name);remove.onclick=()=>{entries=entries.filter(e=>e.id!==entry.id);save();render();};
       row.append(img,details,remove);list.append(row);
     }
@@ -71,7 +70,7 @@ window.RunwayBag = (() => {
   document.getElementById('bag-dialog').addEventListener('click',event=>{if(event.target===event.currentTarget){const r=event.currentTarget.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)event.currentTarget.close();}});
   document.getElementById('export-bag').addEventListener('click',async()=>{
     const catalog=await catalogPromise;
-    const text=['RUNWAY — STYLING SHORTLIST','Reference prices; no order or payment has been placed.','',...entries.map(e=>{const{product,variant}=find(catalog,e.id);return `${product.name} · Size ${variant.o.join(' / ')} · Quantity ${e.quantity}\n${product.url}`;})].join('\n\n');
+    const text=['RUNWAY — STYLING SHORTLIST','Reference prices; no order or payment has been placed.','',...entries.map(e=>{const{product,variant}=find(catalog,e.id);return `${product.name} · Size ${variant.o.join(' / ')} · Quantity ${e.quantity}`;})].join('\n\n');
     const url=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download='runway-outfit-shortlist.txt';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   });
   render().catch(e=>notify(e.message));

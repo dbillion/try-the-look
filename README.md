@@ -8,7 +8,7 @@ A static GitHub Pages recreation of the six-look Nike Runway styling experience.
 - A desktop turning ring and a mobile classic carousel, driven by the original spring/positioning logic.
 - Five-second autoplay, pause/resume, previous/next, progress ticks, drag/swipe and keyboard navigation.
 - A look lightbox with three product pins and linked product rows.
-- Product size selectors, a local styling bag, remove actions and a downloadable shortlist.
+- Product size selectors, an on-site styling bag, remove actions and a downloadable shortlist. The bag contains no outbound product links.
 - Responsive desktop/tablet/mobile layouts and reduced-motion support.
 - A project-specific agent skill and a modular prompt pack under prompts/.
 
@@ -47,7 +47,7 @@ The project uses its own repository (dbillion/try-the-look) and does not overwri
 
 ## Important commerce limitation
 
-The styling bag is a local shortlist stored in the visitor's browser. It does not create a Shopify cart, place an order, collect payment or apply the displayed 10% bundle discount. Product links open the original Shopify product pages. This limitation is stated in the bag UI and must not be removed or obscured.
+The styling bag is an on-site cart-style shortlist stored in the visitor's browser. Opening the bag, reviewing saved items, removing items and downloading the shortlist all stay on this site; the bag and its export contain no outbound product links. This static GitHub Pages build does not have a commerce backend, so it cannot create a server-side Shopify cart, place an order, collect payment or apply the displayed 10% bundle discount. Product-detail links in the look catalogue remain source links, but the shopping bag itself never sends visitors away.
 
 ## Asset hosting
 
